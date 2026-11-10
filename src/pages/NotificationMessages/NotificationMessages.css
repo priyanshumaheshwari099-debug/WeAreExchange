@@ -1,0 +1,745 @@
+/* =========================================
+   WEAREXCHANGE MESSAGES
+   HORIZONTAL CONVERSATION DESIGN
+========================================= */
+
+.notification-page {
+    min-height: calc(100vh - 74px);
+    padding: 55px 5% 80px;
+    background: linear-gradient(135deg, #f8fbff 0%, #eef4fa 100%);
+}
+
+.notification-wrapper {
+    width: min(1180px, 100%);
+    margin: auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.notification-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.notification-label {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: #2563eb;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+}
+
+.notification-top h1 {
+    margin: 0;
+    color: #12263f;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1;
+    font-weight: 750;
+    letter-spacing: -2px;
+}
+
+.notification-top p {
+    margin: 13px 0 0;
+    color: #7c8b9b;
+    font-size: 12px;
+}
+
+.conversation-total {
+    min-width: 110px;
+    padding-left: 25px;
+    border-left: 1px solid #cfd9e3;
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation-total strong {
+    color: #12263f;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.conversation-total span {
+    margin-top: 5px;
+    color: #8795a5;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   SEARCH TOOLBAR
+========================================= */
+
+.notification-tools {
+    height: 55px;
+    margin-bottom: 12px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notification-search {
+    width: 360px;
+    height: 42px;
+    padding: 0 13px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid #dce4ec;
+    border-radius: 7px;
+    background: #fff;
+    transition: .2s ease;
+}
+
+.notification-search:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 4px 18px rgba(37, 99, 235, .08);
+}
+
+.notification-search svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #8795a5;
+    stroke-width: 1.7;
+}
+
+.notification-search input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #243b53;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.notification-search input::placeholder {
+    color: #a0abb8;
+}
+
+.notification-search button {
+    border: 0;
+    background: transparent;
+    color: #8492a2;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.conversation-result {
+    color: #9aa6b4;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================
+   LIST
+========================================= */
+
+.notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+
+/* =========================================
+   HORIZONTAL CONVERSATION BOX
+========================================= */
+
+.notification-card {
+    min-height: 100px;
+    padding: 15px 18px;
+    display: grid;
+    grid-template-columns: 32px 58px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid #e0e7ee;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(18, 38, 63, .035);
+    transition: .25s ease;
+}
+
+.notification-card:hover {
+    border-color: #cbd9e8;
+    box-shadow: 0 12px 28px rgba(18, 38, 63, .08);
+    transform: translateY(-2px);
+}
+
+.conversation-number {
+    color: #b2beca;
+    font-size: 9px;
+    font-weight: 800;
+    text-align: center;
+}
+
+
+/* =========================================
+   AVATAR
+========================================= */
+
+.notification-avatar {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 3px solid #f1f5f9;
+    border-radius: 50%;
+    background: #eaf2ff;
+    color: #2563eb;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.notification-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* =========================================
+   INFO
+========================================= */
+
+.notification-info {
+    min-width: 0;
+}
+
+.notification-name-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 5px;
+}
+
+.notification-name-row h3 {
+    margin: 0;
+    color: #162d47;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.notification-info>p {
+    max-width: 600px;
+    margin: 0;
+    overflow: hidden;
+    color: #748497;
+    font-size: 11px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.conversation-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 7px;
+}
+
+.conversation-meta span,
+.conversation-meta small {
+    color: #a0acb9;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.conversation-meta b {
+    color: #c9d1d9;
+    font-size: 8px;
+}
+
+
+/* =========================================
+   UNREAD
+========================================= */
+
+.notification-unread {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.notification-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.open-chat-btn,
+.delete-chat-btn {
+    height: 39px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.open-chat-btn {
+    min-width: 112px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid #12263f;
+    background: #12263f;
+    color: #fff;
+}
+
+.open-chat-btn span {
+    font-size: 11px;
+}
+
+.open-chat-btn:hover {
+    border-color: #2563eb;
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.delete-chat-btn {
+    min-width: 78px;
+    padding: 0 13px;
+    border: 1px solid #e2bcbc;
+    background: #fff;
+    color: #c54242;
+}
+
+.delete-chat-btn:hover {
+    border-color: #c54242;
+    background: #fff7f7;
+    transform: translateY(-1px);
+}
+
+.delete-chat-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.notification-empty {
+    padding: 80px 20px;
+    text-align: center;
+    border: 1px solid #e0e7ee;
+    border-radius: 13px;
+    background: #fff;
+}
+
+.empty-icon {
+    width: 55px;
+    height: 55px;
+    margin: auto auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #edf4ff;
+    color: #2563eb;
+}
+
+.empty-icon span {
+    font-size: 22px;
+}
+
+.empty-label {
+    color: #2563eb;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.notification-empty h2 {
+    margin: 9px 0 7px;
+    color: #162d47;
+    font-size: 24px;
+}
+
+.notification-empty p {
+    max-width: 400px;
+    margin: auto;
+    color: #8492a2;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.notification-empty button {
+    height: 40px;
+    margin-top: 20px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 7px;
+    background: #12263f;
+    color: #fff;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.notification-empty button span {
+    margin-left: 8px;
+}
+
+
+/* =========================================
+   SKELETON
+========================================= */
+
+.skeleton-card {
+    cursor: default;
+}
+
+.skeleton-card:hover {
+    transform: none;
+    border-color: #e0e7ee;
+    box-shadow: 0 5px 20px rgba(18, 38, 63, .035);
+}
+
+.skeleton-avatar,
+.skeleton-info span,
+.skeleton-info b,
+.skeleton-button {
+    display: block;
+    background: #edf2f6;
+    border-radius: 6px;
+}
+
+.skeleton-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+}
+
+.skeleton-info span {
+    width: 130px;
+    height: 10px;
+    margin-bottom: 9px;
+}
+
+.skeleton-info b {
+    width: 250px;
+    height: 8px;
+}
+
+.skeleton-button {
+    width: 110px;
+    height: 39px;
+}
+
+.skeleton-button.small {
+    width: 78px;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.notification-login {
+    min-height: calc(100vh - 74px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: #f4f7fb;
+}
+
+.login-message-box {
+    width: min(430px, 100%);
+    padding: 48px 32px;
+    border: 1px solid #e0e7ee;
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(18, 38, 63, .08);
+}
+
+.login-message-icon {
+    width: 58px;
+    height: 58px;
+    margin: auto auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #edf4ff;
+    color: #2563eb;
+    font-size: 22px;
+}
+
+.login-message-label {
+    color: #2563eb;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.login-message-box h2 {
+    margin: 10px 0;
+    color: #162d47;
+    font-size: 25px;
+}
+
+.login-message-box p {
+    margin: 0;
+    color: #7d8b9b;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.login-message-box button {
+    height: 42px;
+    margin-top: 22px;
+    padding: 0 21px;
+    border: 0;
+    border-radius: 7px;
+    background: #12263f;
+    color: #fff;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.login-message-box button span {
+    margin-left: 8px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+    .notification-page {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+    .notification-card {
+        grid-template-columns: 25px 54px minmax(0, 1fr);
+    }
+    .notification-actions {
+        grid-column: 3;
+        justify-content: flex-start;
+        margin-top: 5px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+    .notification-page {
+        padding: 35px 12px 60px;
+    }
+    .notification-top {
+        align-items: flex-start;
+    }
+    .notification-top h1 {
+        font-size: 34px;
+        letter-spacing: -1.5px;
+    }
+    .conversation-total {
+        min-width: 70px;
+        padding-left: 14px;
+    }
+    .conversation-total strong {
+        font-size: 23px;
+    }
+    .notification-tools {
+        height: auto;
+        margin-bottom: 15px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+    }
+    .notification-search {
+        width: 100%;
+    }
+    .conversation-result {
+        align-self: flex-end;
+    }
+    .notification-card {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 11px;
+        padding: 15px;
+    }
+    .conversation-number {
+        display: none;
+    }
+    .notification-avatar {
+        width: 48px;
+        height: 48px;
+    }
+    .notification-actions {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 85px;
+        gap: 8px;
+        margin-top: 3px;
+    }
+    .open-chat-btn,
+    .delete-chat-btn {
+        width: 100%;
+        min-width: 0;
+    }
+    .notification-info>p {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+    .notification-page {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .notification-top {
+        display: block;
+    }
+    .conversation-total {
+        width: fit-content;
+        margin-top: 18px;
+    }
+    .notification-top h1 {
+        font-size: 31px;
+    }
+}
+
+.delivery-confirm-alerts {
+    margin: 0 0 28px;
+    padding: 22px;
+    border: 1px solid #dbe7ff;
+    border-radius: 16px;
+    background: #f7f9ff;
+}
+
+.delivery-confirm-alerts>h2 {
+    margin: 0 0 6px;
+    color: #172b4d;
+    font-size: 22px;
+}
+
+.delivery-confirm-alerts>p {
+    margin: 0 0 18px;
+    color: #64748b;
+}
+
+.delivery-confirm-alert {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    margin-top: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.delivery-confirm-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+.delivery-confirm-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.delivery-confirm-info h3 {
+    margin: 0 0 5px;
+    color: #172b4d;
+    font-size: 16px;
+}
+
+.delivery-confirm-info p {
+    margin: 0 0 5px;
+    color: #475569;
+}
+
+.delivery-confirm-info span {
+    color: #b7791f;
+    font-size: 13px;
+}
+
+.delivery-confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 9px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delivery-confirm-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 650px) {
+    .delivery-confirm-alert {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .delivery-confirm-info {
+        width: calc(100% - 64px);
+        flex: none;
+    }
+    .delivery-confirm-btn {
+        width: 100%;
+    }
+}

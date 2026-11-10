@@ -1,0 +1,259 @@
+.how-section {
+    position: relative;
+    padding: 0px 6%;
+    background: #0f2139;
+    color: #fff;
+    overflow: hidden;
+}
+
+.how-section::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: -300px;
+    right: -200px;
+    background: #2563eb;
+    opacity: .10;
+    filter: blur(100px);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.how-section::after {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    bottom: -250px;
+    left: -200px;
+    background: #38bdf8;
+    opacity: .07;
+    filter: blur(100px);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.how-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.how-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+    margin-bottom: 85px;
+}
+
+.how-mini-title {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #60a5fa;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.how-top h2 {
+    margin: 0;
+    font-size: clamp(42px, 5.5vw, 76px);
+    line-height: .98;
+    letter-spacing: -3px;
+    font-weight: 800;
+}
+
+.how-top h2 span {
+    color: #60a5fa;
+}
+
+.how-top>p {
+    max-width: 390px;
+    margin: 0 0 5px;
+    color: #94a3b8;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.how-timeline {
+    position: relative;
+}
+
+.how-line {
+    position: absolute;
+    top: 30px;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: linear-gradient( 90deg, transparent, #2563eb, #60a5fa, #2563eb, transparent);
+    opacity: .7;
+}
+
+.how-steps {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+}
+
+.how-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.how-dot {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 25px;
+    border: 1px solid #3b82f6;
+    border-radius: 50%;
+    background: #07111f;
+    box-shadow: 0 0 0 8px #07111f, 0 0 30px rgba(37, 99, 235, .25);
+}
+
+.how-dot span {
+    color: #60a5fa;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.how-card {
+    width: 100%;
+    min-height: 230px;
+    padding: 24px 20px;
+    border: 1px solid rgba(148, 163, 184, .15);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .045);
+    backdrop-filter: blur(10px);
+    transition: transform .35s ease, border-color .35s ease, background .35s ease, box-shadow .35s ease;
+}
+
+.how-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(96, 165, 250, .6);
+    background: rgba(37, 99, 235, .10);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+}
+
+.how-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.how-card-top>span:first-child {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.how-arrow {
+    color: #60a5fa;
+    font-size: 19px;
+    transition: transform .3s ease;
+}
+
+.how-card:hover .how-arrow {
+    transform: translate(4px, -4px);
+}
+
+.how-card h3 {
+    margin: 0 0 13px;
+    color: #f8fafc;
+    font-size: 18px;
+    line-height: 1.25;
+}
+
+.how-card p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media (max-width: 1100px) {
+    .how-steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px 18px;
+    }
+    .how-line {
+        display: none;
+    }
+    .how-card {
+        min-height: 210px;
+    }
+}
+
+@media (max-width: 800px) {
+    .how-section {
+        padding: 80px 5%;
+    }
+    .how-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 25px;
+        margin-bottom: 55px;
+    }
+    .how-top h2 {
+        letter-spacing: -2px;
+    }
+    .how-top>p {
+        max-width: 600px;
+    }
+    .how-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .how-section {
+        padding: 65px 5%;
+    }
+    .how-top h2 {
+        font-size: 42px;
+    }
+    .how-mini-title {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+    .how-top>p {
+        font-size: 14px;
+    }
+    .how-steps {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+    .how-step {
+        align-items: stretch;
+    }
+    .how-dot {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 15px;
+        align-self: center;
+    }
+    .how-card {
+        min-height: auto;
+        padding: 22px;
+    }
+    .how-card-top {
+        margin-bottom: 25px;
+    }
+    .how-card h3 {
+        font-size: 18px;
+    }
+    .how-bottom {
+        margin-top: 45px;
+    }
+}

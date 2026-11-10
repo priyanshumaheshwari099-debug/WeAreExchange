@@ -1,0 +1,127 @@
+.browse-hero-visual {
+    position: relative;
+    width: 560px;
+    height: 500px;
+    flex-shrink: 0;
+}
+
+.hero-clothing-card {
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid rgba(20, 33, 61, 0.08);
+    border-radius: 20px;
+    background: #f4f6f9;
+    box-shadow: 0 25px 60px rgba(20, 33, 61, 0.12);
+}
+
+.hero-clothing-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* BACK CARD */
+
+.hero-card-1 {
+    width: 220px;
+    height: 290px;
+    left: 0;
+    top: 125px;
+    z-index: 1;
+    transform: rotate(-2deg);
+}
+
+
+/* MIDDLE CARD */
+
+.hero-card-2 {
+    width: 300px;
+    height: 400px;
+    left: 130px;
+    top: 55px;
+    z-index: 2;
+    transform: rotate(1deg);
+}
+
+
+/* FRONT CARD */
+
+.hero-card-3 {
+    width: 250px;
+    height: 355px;
+    right: 0;
+    top: 0;
+    z-index: 3;
+    transform: rotate(1.5deg);
+}
+
+.hero-new-badge {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    padding: 8px 14px;
+    border-radius: 7px;
+    background: rgba(245, 247, 251, 0.92);
+    color: #14213d;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+@media (max-width: 1100px) {
+    .browse-hero-visual {
+        width: 450px;
+        height: 430px;
+    }
+    .hero-card-1 {
+        width: 175px;
+        height: 240px;
+        top: 105px;
+    }
+    .hero-card-2 {
+        width: 245px;
+        height: 330px;
+        left: 105px;
+    }
+    .hero-card-3 {
+        width: 205px;
+        height: 295px;
+    }
+}
+
+@media (max-width: 850px) {
+    .browse-hero-visual {
+        width: 100%;
+        max-width: 500px;
+        height: 400px;
+        margin: 30px auto 0;
+    }
+}
+
+@media (max-width: 550px) {
+    .browse-hero-visual {
+        height: 330px;
+    }
+    .hero-card-1 {
+        width: 135px;
+        height: 190px;
+        top: 90px;
+    }
+    .hero-card-2 {
+        width: 185px;
+        height: 260px;
+        left: 75px;
+    }
+    .hero-card-3 {
+        width: 155px;
+        height: 225px;
+    }
+    .hero-new-badge {
+        top: 12px;
+        left: 12px;
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&display=swap");
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #f7faff;
+    color: #2563eb;
+    overflow: hidden;
+}
+
+.preloader-number {
+    position: absolute;
+    left: 35px;
+    bottom: 30px;
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(40px, 15vw, 120px);
+    font-weight: 500;
+    line-height: 0.8;
+    letter-spacing: -8px;
+    background: linear-gradient( 135deg, #0f3d91, #2563eb, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+}
+
+.preloader-name {
+    position: absolute;
+    top: 30px;
+    left: 35px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #14213d;
+}
+
+.preloader-name span {
+    color: #2563eb;
+}
+
+@media (max-width: 600px) {
+    .preloader-number {
+        left: 20px;
+        bottom: 25px;
+        font-size: 90px;
+        letter-spacing: -5px;
+    }
+    .preloader-name {
+        left: 20px;
+        top: 20px;
+    }
+}

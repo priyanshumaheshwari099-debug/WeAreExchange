@@ -1,0 +1,657 @@
+/* ========================================
+   NAVBAR
+======================================== */
+
+.navbar {
+    width: 100%;
+    height: 72px;
+    padding: 0 clamp(20px, 5vw, 70px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: none;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ========================================
+   LOGO
+======================================== */
+
+.navbar-name {
+    position: absolute;
+    top: 30px;
+    left: 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    line-height: 1;
+    color: #14213d;
+    text-decoration: none;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.navbar-name span {
+    color: #2563eb;
+}
+
+
+/* ========================================
+   NAVIGATION LINKS
+======================================== */
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.5vw, 34px);
+    margin-left: auto;
+    margin-right: clamp(25px, 3vw, 45px);
+}
+
+.navbar-links a {
+    position: relative;
+    padding: 25px 0;
+    text-decoration: none;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.navbar-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 17px;
+    width: 0;
+    height: 2px;
+    border-radius: 10px;
+    background: #2563eb;
+    transition: width 0.25s ease;
+}
+
+.navbar-links a:hover {
+    color: #2563eb;
+}
+
+.navbar-links a:hover::after {
+    width: 100%;
+}
+
+
+/* ========================================
+   SWAP REQUEST NOTIFICATION
+======================================== */
+
+.swap-badge {
+    position: absolute;
+    top: 15px;
+    right: -16px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.25);
+}
+
+
+/* ========================================
+   RIGHT ACTIONS
+======================================== */
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* ========================================
+   LOGIN
+======================================== */
+
+.login-btn {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.login-btn:hover {
+    background: #eff6ff;
+}
+
+
+/* ========================================
+   SIGN UP
+======================================== */
+
+.signup-btn {
+    padding: 10px 19px;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 5px 14px rgba(37, 99, 235, 0.20);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+}
+
+
+/* ========================================
+   PROFILE
+======================================== */
+
+.navbar-profile {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.navbar-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-large-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-arrow {
+    font-size: 18px;
+    line-height: 1;
+    color: #334155;
+}
+
+
+/* ========================================
+   PROFILE PLACEHOLDER
+======================================== */
+
+.profile-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2563eb;
+    color: white;
+    font-weight: 700;
+}
+
+.profile-info .profile-placeholder {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   PROFILE DROPDOWN
+======================================== */
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 230px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.profile-info img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.profile-info strong {
+    font-size: 14px;
+    color: #172033;
+}
+
+.profile-info small {
+    font-size: 11px;
+    color: #777777;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 0;
+    background: none;
+    text-align: left;
+    text-decoration: none;
+    color: #222222;
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+    background: #f5f7fa;
+}
+
+
+/* ========================================
+   MOBILE BUTTON
+======================================== */
+
+.menu-btn {
+    display: none;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    background: white;
+    cursor: pointer;
+    padding: 9px;
+    box-sizing: border-box;
+}
+
+.menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background: #1e3a8a;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+
+/* ========================================
+   MOBILE MENU
+======================================== */
+
+.mobile-menu {
+    display: none;
+}
+
+
+/* ========================================
+   MOBILE PROFILE
+======================================== */
+
+.mobile-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.mobile-profile>span {
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.mobile-profile a {
+    width: 100%;
+    padding: 10px;
+    color: #334155;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.mobile-profile button {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    background: none;
+    color: #334155;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.mobile-profile a:hover,
+.mobile-profile button:hover {
+    background: #f5f7fa;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+    .navbar {
+        padding: 0 25px;
+    }
+    .navbar-links {
+        gap: 18px;
+        margin-right: 20px;
+    }
+    .navbar-links a {
+        font-size: 13px;
+    }
+    .navbar-name {
+        font-size: 15px;
+        letter-spacing: 3px;
+        left: 25px;
+    }
+    .signup-btn {
+        padding: 9px 14px;
+    }
+    .swap-badge {
+        top: 15px;
+        right: -14px;
+        min-width: 17px;
+        height: 17px;
+        font-size: 8px;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 760px) {
+    .navbar {
+        width: 100%;
+        height: 66px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        box-sizing: border-box;
+    }
+    /*
+       IMPORTANT:
+       Logo is no longer absolute on mobile.
+       This prevents logo/hamburger overlap.
+    */
+    .navbar-name {
+        position: static;
+        top: auto;
+        left: auto;
+        display: block;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        letter-spacing: 3px;
+        line-height: 1;
+        white-space: nowrap;
+        z-index: 2;
+    }
+    .navbar-links,
+    .navbar-actions {
+        display: none;
+    }
+    .menu-btn {
+        display: block;
+        position: relative;
+        z-index: 3;
+        margin-left: auto;
+    }
+    .mobile-menu {
+        position: absolute;
+        top: 66px;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        background: white;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+    .mobile-menu.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .mobile-menu>a {
+        position: relative;
+        padding: 13px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #334155;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .mobile-menu>a:hover {
+        background: #eff6ff;
+        color: #2563eb;
+    }
+    .mobile-badge {
+        position: static;
+        margin-left: 7px;
+        vertical-align: middle;
+        min-width: 19px;
+        height: 19px;
+        font-size: 9px;
+    }
+    .mobile-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+        padding-top: 15px;
+        border-top: 1px solid #e5e7eb;
+    }
+    .mobile-login,
+    .mobile-signup {
+        flex: 1;
+        text-align: center;
+        padding: 11px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .mobile-login {
+        color: #2563eb;
+        background: #eff6ff;
+    }
+    .mobile-signup {
+        color: white;
+        background: #2563eb;
+    }
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+    .navbar {
+        height: 62px;
+        padding: 0 14px;
+    }
+    .navbar-name {
+        position: static;
+        font-size: 14px;
+        letter-spacing: 2.5px;
+        line-height: 1;
+        max-width: calc(100% - 55px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .menu-btn {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        margin-left: 10px;
+        padding: 8px;
+    }
+    .mobile-menu {
+        top: 62px;
+        padding: 15px;
+    }
+    .mobile-menu>a {
+        font-size: 14px;
+    }
+}
+
+
+/* ========================================
+   VERY SMALL MOBILE
+======================================== */
+
+@media (max-width: 340px) {
+    .navbar {
+        padding: 0 10px;
+    }
+    .navbar-name {
+        font-size: 13px;
+        letter-spacing: 2px;
+    }
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        margin-left: 8px;
+    }
+}
+
+
+/* ========================================
+   CHAT BUTTON
+======================================== */
+
+.navbar-chat-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #1769e0;
+    font-size: 18px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.navbar-chat-btn:hover {
+    background: #dbeafe;
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   CHAT BADGE
+======================================== */
+
+.chat-badge {
+    position: absolute;
+    top: -3px;
+    right: -4px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ef4444;
+    color: white;
+    font-size: 8px;
+    font-weight: 800;
+    border: 2px solid white;
+}
+
+
+/* ========================================
+   MOBILE CHAT
+======================================== */
+
+.mobile-chat-link {
+    position: relative;
+}
+
+.mobile-chat-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    margin-left: 8px;
+    padding: 0 5px;
+    border-radius: 20px;
+    background: #ef4444;
+    color: white;
+    font-size: 9px;
+    font-weight: 800;
+}
