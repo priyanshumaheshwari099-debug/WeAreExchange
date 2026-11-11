@@ -9,11 +9,8 @@ const clothingRoutes = require("./routes/clothingRoutes");
 const swappingRoutes = require("./routes/swappingRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 
-const Port = 5000;
-
 const app = express();
-
-connectDB();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -26,13 +23,24 @@ app.use("/api/swapping", swappingRoutes);
 app.use("/api/messages", messageRoutes);
 
 app.get("/", (req, res) => {
-    res.send("WearExchange Backend is running");
+    res.status(200).send("WearExchange Backend is running");
 });
 
 app.get("/api/auth/test", (req, res) => {
-    res.send("Auth route working");
+    res.status(200).send("Auth route working");
 });
 
-app.listen(Port, () => {
-    console.log(`Server running on port ${Port}`);
-});
+const startServer = async() => {
+    try {
+        await connectDB();
+
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Server startup failed:", error.message);
+        process.exit(1);
+    }
+};
+
+startServer();
