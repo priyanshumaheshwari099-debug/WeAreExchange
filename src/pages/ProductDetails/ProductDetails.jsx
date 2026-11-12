@@ -8,15 +8,18 @@ import Footer from "../../components/Footer/Footer";
 import ProductGallery from "../../components/ProductGallery/ProductGallery";
 import "./ProductDetails.css";
 
+const API = "https://wearexchange-backend.onrender.com";
+
 function ProductDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
+
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/api/clothing/${id}`)
+            .get(`${API}/api/clothing/${id}`)
             .then(({ data }) => setProduct(data))
             .catch(error => console.log("Product Error:", error))
             .finally(() => setLoading(false));
@@ -121,10 +124,12 @@ function ProductDetails() {
                                 <span>SIZE</span>
                                 <strong>{product.size || "N/A"}</strong>
                             </div>
+
                             <div>
                                 <span>CONDITION</span>
                                 <strong>{product.condition || "N/A"}</strong>
                             </div>
+
                             <div>
                                 <span>VALUE</span>
                                 <strong>
@@ -159,6 +164,7 @@ function ProductDetails() {
                                     <small>Give clothes a longer life</small>
                                 </div>
                             </div>
+
                             <div>
                                 <span>↔</span>
                                 <div>
@@ -185,18 +191,22 @@ function ProductDetails() {
                                 <span>Category</span>
                                 <strong>{product.category || "N/A"}</strong>
                             </div>
+
                             <div className="pd-detail-row">
                                 <span>Brand</span>
                                 <strong>{product.brand || "Not specified"}</strong>
                             </div>
+
                             <div className="pd-detail-row">
                                 <span>Size</span>
                                 <strong>{product.size || "N/A"}</strong>
                             </div>
+
                             <div className="pd-detail-row">
                                 <span>Condition</span>
                                 <strong>{product.condition || "N/A"}</strong>
                             </div>
+
                             <div className="pd-detail-row">
                                 <span>Estimated Value</span>
                                 <strong>
@@ -239,10 +249,12 @@ function ProductDetails() {
                                     <strong>✓</strong>
                                     <span>Community Listing</span>
                                 </div>
+
                                 <div>
                                     <strong>↔</strong>
                                     <span>Open for Swap</span>
                                 </div>
+
                                 <div>
                                     <strong>⌖</strong>
                                     <span>{product.city || "India"}</span>

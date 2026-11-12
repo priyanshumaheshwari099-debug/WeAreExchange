@@ -1,10 +1,11 @@
+
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Chat.css";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 function Chat() {
     const { swapId } = useParams();
@@ -48,7 +49,6 @@ function Chat() {
                     : []
             );
 
-            // NAME + PHOTO KO PRESERVE KARNA
             if (res.data.otherUser) {
                 setOtherUser(res.data.otherUser);
             }
@@ -159,19 +159,13 @@ function Chat() {
                 <Navbar />
 
                 <div className="chat-empty">
-
-                    <h2>
-                        Please login first
-                    </h2>
+                    <h2>Please login first</h2>
 
                     <button
-                        onClick={() =>
-                            navigate("/login")
-                        }
+                        onClick={() => navigate("/login")}
                     >
                         LOGIN
                     </button>
-
                 </div>
             </>
         );
@@ -183,7 +177,6 @@ function Chat() {
 
             <main className="chat-page">
 
-                {/* BACK BUTTON */}
                 <button
                     className="chat-back"
                     onClick={() => navigate(-1)}
@@ -193,22 +186,13 @@ function Chat() {
 
                 <div className="chat-container">
 
-                    {/* CHAT HEADER */}
                     <div className="chat-header">
-
                         <div className="chat-user">
-
                             <div className="chat-avatar">
-
                                 {otherUser?.profileImage ? (
                                     <img
-                                        src={
-                                            otherUser.profileImage
-                                        }
-                                        alt={
-                                            otherUser?.name ||
-                                            "User"
-                                        }
+                                        src={otherUser.profileImage}
+                                        alt={otherUser?.name || "User"}
                                         referrerPolicy="no-referrer"
                                     />
                                 ) : (
@@ -216,18 +200,14 @@ function Chat() {
                                         ?.charAt(0)
                                         ?.toUpperCase() || "U"
                                 )}
-
                             </div>
 
                             <h2>
                                 {otherUser?.name || "User"}
                             </h2>
-
                         </div>
-
                     </div>
 
-                    {/* MESSAGES */}
                     <div className="messages-area">
 
                         {loading ? (
@@ -237,7 +217,6 @@ function Chat() {
 
                         ) : messages.length === 0 ? (
                             <div className="chat-start">
-
                                 <div className="chat-start-icon">
                                     💬
                                 </div>
@@ -250,12 +229,10 @@ function Chat() {
                                     Send a message to discuss
                                     the swap.
                                 </p>
-
                             </div>
 
                         ) : (
                             messages.map((item) => {
-
                                 const mine =
                                     item.sender === user.id;
 
@@ -268,9 +245,7 @@ function Chat() {
                                                 : "message-row theirs"
                                         }
                                     >
-
                                         <div className="message-bubble">
-
                                             <p>
                                                 {item.message}
                                             </p>
@@ -286,24 +261,19 @@ function Chat() {
                                                     }
                                                 )}
                                             </small>
-
                                         </div>
-
                                     </div>
                                 );
                             })
                         )}
 
                         <div ref={bottomRef} />
-
                     </div>
 
-                    {/* MESSAGE INPUT */}
                     <form
                         className="chat-input-area"
                         onSubmit={sendMessage}
                     >
-
                         <input
                             type="text"
                             placeholder="Write a message..."
@@ -320,15 +290,11 @@ function Chat() {
                                 sending
                             }
                         >
-                            {sending
-                                ? "..."
-                                : "SEND →"}
+                            {sending ? "..." : "SEND →"}
                         </button>
-
                     </form>
 
                 </div>
-
             </main>
         </>
     );

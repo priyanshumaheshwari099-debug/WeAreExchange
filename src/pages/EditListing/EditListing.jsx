@@ -16,8 +16,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./EditListing.css";
 
-const API = "http://localhost:5000";
-
+const API = "https://wearexchange-backend.onrender.com";
 function EditListing() {
     const { id } = useParams();
     const navigate = useNavigate();

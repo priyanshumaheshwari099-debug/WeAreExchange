@@ -13,8 +13,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./MyListing.css";
 
-const API = "http://localhost:5000";
-
+const API = "https://wearexchange-backend.onrender.com";
 function MyListings() {
     const [clothes, setClothes] = useState([]);
     const [loading, setLoading] = useState(true);

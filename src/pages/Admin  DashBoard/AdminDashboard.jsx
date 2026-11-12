@@ -9,7 +9,7 @@ import {
 import "./AdminDashboard.css";
 import Footer from "../../components/Footer/Footer";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 const navItems = [
     [LayoutDashboard, "Dashboard", "/admin"],
@@ -186,8 +186,6 @@ function AdminDashboard() {
                                 <RefreshCw size={18} />
                             </button>
 
-                           
-
                             <Link to="/profile" className="top-profile">
                                 <Avatar
                                     user={user}
@@ -218,7 +216,7 @@ function AdminDashboard() {
 
                             <Link to="/add-clothing" className="add-btn">
                                 <Plus size={17} />
-                                      Add cLOTHING
+                                Add cLOTHING
                             </Link>
                         </div>
 

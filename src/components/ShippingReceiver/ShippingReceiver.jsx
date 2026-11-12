@@ -3,7 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API = "http://localhost:5000/api/swapping";
+const API = "https://wearexchange-backend.onrender.com/api/swapping";
+const IMAGE_API = "https://wearexchange-backend.onrender.com";
 
 export default function ShippingReceiver({ swap, userId, role, onUpdate }) {
   const [loading, setLoading] = useState(false);
@@ -44,7 +45,11 @@ export default function ShippingReceiver({ swap, userId, role, onUpdate }) {
           <div className="delivery-product-image">
             {item?.images?.[0] ? (
               <img
-                src={item.images[0].startsWith("http") ? item.images[0] : `http://localhost:5000${item.images[0]}`}
+                src={
+                  item.images[0].startsWith("http")
+                    ? item.images[0]
+                    : `${IMAGE_API}${item.images[0]}`
+                }
                 alt={item.title || "Clothing item"}
               />
             ) : "👕"}

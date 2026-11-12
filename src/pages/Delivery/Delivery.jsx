@@ -1,3 +1,4 @@
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -6,7 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./Delivery.css";
 
-const API = "http://localhost:5000/api/swapping";
+const API = "https://wearexchange-backend.onrender.com/api/swapping";
 
 const emptyAddress = {
   firstName: "",
@@ -273,9 +274,11 @@ export default function Delivery() {
   };
 
   const confirmMeeting = async () => {
-    if (!swap?.meetingDetails?.location ||
-        !swap?.meetingDetails?.date ||
-        !swap?.meetingDetails?.time) {
+    if (
+      !swap?.meetingDetails?.location ||
+      !swap?.meetingDetails?.date ||
+      !swap?.meetingDetails?.time
+    ) {
       toast.info("Meetup details are not complete yet.");
       return;
     }
@@ -367,7 +370,8 @@ export default function Delivery() {
     typeof swap.offeredItem === "object" ? swap.offeredItem : null;
   const requestedItem =
     typeof swap.requestedItem === "object" ? swap.requestedItem : null;
-      const steps = [
+
+  const steps = [
     { label: "Method", done: Boolean(methodConfirmed) },
     {
       label: method === "local" ? "Meetup" : "Shipping",
@@ -416,7 +420,9 @@ export default function Delivery() {
                 {isCompleted ? "✓" : "↗"}
               </div>
               <span className="delivery-status-label">CURRENT STATUS</span>
-              <strong>{isCompleted ? "Completed" : getStatus(swap.status)}</strong>
+              <strong>
+                {isCompleted ? "Completed" : getStatus(swap.status)}
+              </strong>
               <span className="delivery-status-caption">
                 {isCompleted
                   ? "Both participants confirmed receipt."
@@ -615,7 +621,8 @@ export default function Delivery() {
                     </p>
                   </div>
                 </div>
-                                <div className="delivery-panel">
+
+                <div className="delivery-panel">
                   <div className="delivery-panel-heading">
                     <span className="delivery-step-icon">01</span>
                     <div>
@@ -650,7 +657,9 @@ export default function Delivery() {
                         <span>State <b>*</b></span>
                         <select value={address.state} onChange={(e) => setAddress({ ...address, state: e.target.value, city: "" })} required disabled={isCompleted}>
                           <option value="">Select state</option>
-                          {states.map((state) => <option key={state} value={state}>{state}</option>)}
+                          {states.map((state) => (
+                            <option key={state} value={state}>{state}</option>
+                          ))}
                         </select>
                       </label>
                       <label className="delivery-field">
@@ -840,7 +849,9 @@ export default function Delivery() {
                 )}
               </div>
             </section>
-          )}          {isAccepted && methodConfirmed && (
+          )}
+
+          {isAccepted && methodConfirmed && (
             <section className="delivery-section">
               <div className="delivery-section-heading">
                 <div>

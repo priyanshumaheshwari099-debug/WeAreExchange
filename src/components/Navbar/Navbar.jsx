@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -5,7 +6,7 @@ import axios from "axios";
 import { auth } from "../../firebase";
 import "./Navbar.css";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 const links = [
     ["/", "Home"],
@@ -76,16 +77,10 @@ function Navbar() {
 
         getSwapCount();
 
-        window.addEventListener(
-            "swapUpdated",
-            getSwapCount
-        );
+        window.addEventListener("swapUpdated", getSwapCount);
 
         return () => {
-            window.removeEventListener(
-                "swapUpdated",
-                getSwapCount
-            );
+            window.removeEventListener("swapUpdated", getSwapCount);
         };
     }, [user]);
 
@@ -118,10 +113,7 @@ function Navbar() {
 
         getChatCount();
 
-        const interval = setInterval(
-            getChatCount,
-            3000
-        );
+        const interval = setInterval(getChatCount, 3000);
 
         return () => {
             clearInterval(interval);
@@ -191,7 +183,6 @@ function Navbar() {
 
             {/* DESKTOP LINKS */}
             <div className="navbar-links">
-
                 {links.map(([path, name]) => (
                     <Link
                         key={path}
@@ -203,14 +194,11 @@ function Navbar() {
                         {name === "Swap Requests" &&
                             swapCount > 0 && (
                                 <span className="swap-badge">
-                                    {swapCount > 99
-                                        ? "99+"
-                                        : swapCount}
+                                    {swapCount > 99 ? "99+" : swapCount}
                                 </span>
                             )}
                     </Link>
                 ))}
-
             </div>
 
             {/* DESKTOP ACTIONS */}
@@ -221,8 +209,8 @@ function Navbar() {
                     <button
                         className="navbar-chat-btn"
                         onClick={() => {
-    navigate("/notification-messages");
-}}
+                            navigate("/notification-messages");
+                        }}
                         title="Messages"
                         aria-label="Messages"
                     >
@@ -230,9 +218,7 @@ function Navbar() {
 
                         {chatCount > 0 && (
                             <span className="chat-badge">
-                                {chatCount > 99
-                                    ? "99+"
-                                    : chatCount}
+                                {chatCount > 99 ? "99+" : chatCount}
                             </span>
                         )}
                     </button>
@@ -241,29 +227,20 @@ function Navbar() {
                 {/* LOGIN / PROFILE */}
                 {!user ? (
                     <>
-                        <Link
-                            to="/login"
-                            className="login-btn"
-                        >
+                        <Link to="/login" className="login-btn">
                             Login
                         </Link>
 
-                        <Link
-                            to="/signup"
-                            className="signup-btn"
-                        >
+                        <Link to="/signup" className="signup-btn">
                             Sign Up
                         </Link>
                     </>
                 ) : (
                     <div className="navbar-profile">
-
                         <button
                             className="profile-btn"
                             onClick={() =>
-                                setProfileOpen(
-                                    prev => !prev
-                                )
+                                setProfileOpen(prev => !prev)
                             }
                         >
                             <ProfileImage />
@@ -271,52 +248,35 @@ function Navbar() {
 
                         {profileOpen && (
                             <div className="profile-dropdown">
-
                                 <div className="profile-info">
-
                                     <ProfileImage large />
 
                                     <div>
-                                        <strong>
-                                            {user.name}
-                                        </strong>
-
-                                        <small>
-                                            {user.email}
-                                        </small>
+                                        <strong>{user.name}</strong>
+                                        <small>{user.email}</small>
                                     </div>
-
                                 </div>
 
                                 <Link
                                     to="/admin"
-                                    onClick={() =>
-                                        setProfileOpen(false)
-                                    }
+                                    onClick={() => setProfileOpen(false)}
                                 >
                                     Admin Dashboard
                                 </Link>
 
-                                <button
-                                    onClick={handleLogout}
-                                >
+                                <button onClick={handleLogout}>
                                     Logout
                                 </button>
-
                             </div>
                         )}
-
                     </div>
                 )}
-
             </div>
 
             {/* MOBILE BUTTON */}
             <button
                 className="menu-btn"
-                onClick={() =>
-                    setMenuOpen(prev => !prev)
-                }
+                onClick={() => setMenuOpen(prev => !prev)}
                 aria-label="Toggle navigation menu"
             >
                 <span />
@@ -330,7 +290,6 @@ function Navbar() {
                     menuOpen ? "open" : ""
                 }`}
             >
-
                 {links.map(([path, name]) => (
                     <Link
                         key={path}
@@ -342,9 +301,7 @@ function Navbar() {
                         {name === "Swap Requests" &&
                             swapCount > 0 && (
                                 <span className="swap-badge mobile-badge">
-                                    {swapCount > 99
-                                        ? "99+"
-                                        : swapCount}
+                                    {swapCount > 99 ? "99+" : swapCount}
                                 </span>
                             )}
                     </Link>
@@ -361,9 +318,7 @@ function Navbar() {
 
                         {chatCount > 0 && (
                             <span className="mobile-chat-badge">
-                                {chatCount > 99
-                                    ? "99+"
-                                    : chatCount}
+                                {chatCount > 99 ? "99+" : chatCount}
                             </span>
                         )}
                     </Link>
@@ -371,7 +326,6 @@ function Navbar() {
 
                 {/* MOBILE ACTIONS */}
                 <div className="mobile-actions">
-
                     {!user ? (
                         <>
                             <Link
@@ -392,12 +346,9 @@ function Navbar() {
                         </>
                     ) : (
                         <div className="mobile-profile">
-
                             <ProfileImage />
 
-                            <span>
-                                {user.name}
-                            </span>
+                            <span>{user.name}</span>
 
                             <Link
                                 to="/admin"
@@ -406,19 +357,13 @@ function Navbar() {
                                 Admin Dashboard
                             </Link>
 
-                            <button
-                                onClick={handleLogout}
-                            >
+                            <button onClick={handleLogout}>
                                 Logout
                             </button>
-
                         </div>
                     )}
-
                 </div>
-
             </div>
-
         </nav>
     );
 }

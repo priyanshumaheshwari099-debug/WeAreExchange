@@ -6,7 +6,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./DeliveryOverview.css";
 
-const API = "http://localhost:5000/api/swapping";
+const API = "https://wearexchange-backend.onrender.com/api/swapping";
+const IMAGE_API = "https://wearexchange-backend.onrender.com";
 
 const getUser = () => {
   try {
@@ -390,7 +391,7 @@ export default function DeliveryOverview() {
                           const imageUrl = image
                             ? image.startsWith("http")
                               ? image
-                              : `http://localhost:5000${image.startsWith("/") ? "" : "/"}${image}`
+                              : `${IMAGE_API}${image.startsWith("/") ? "" : "/"}${image}`
                             : "";
 
                           return (

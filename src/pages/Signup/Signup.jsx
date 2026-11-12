@@ -9,7 +9,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./Signup.css";
 import Footer from "../../components/Footer/Footer"
 
-const API = "http://localhost:5000/api/auth";
+const API = "https://wearexchange-backend.onrender.com/api/auth";
 
 function Signup() {
   const navigate = useNavigate();

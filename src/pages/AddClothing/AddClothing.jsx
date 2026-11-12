@@ -8,7 +8,7 @@ import Footer from "../../components/Footer/Footer";
 import LocationPicker from "./LocationPicker/LocationPicker";
 import "./AddClothing.css";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 const categories = ["Men's Wear", "Women's Wear", "Kids Wear", "Footwear", "Winter Wear", "Sports Wear", "Ethnic Wear", "Accessories", "Others", "Top", "Jeans"];
 const sizes = ["XS", "S", "M", "L", "XL", "XXL", "Free Size"];
@@ -97,7 +97,6 @@ function AddClothing() {
         const activeUser = getUser();
         const activeUserId = activeUser?.id || activeUser?._id;
 
-        // Guest flow: show toast and redirect to signup
         if (!activeUserId) {
             toast.info("Please sign up to add clothing!", { autoClose: 3000 });
             setTimeout(() => navigate("/signup"), 3000);

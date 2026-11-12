@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./ProductGallery.css";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 function ProductGallery({ images = [] }) {
 
@@ -51,7 +51,6 @@ function ProductGallery({ images = [] }) {
         <div className="product-gallery">
 
             {/* MAIN IMAGE */}
-
             <div className="main-product-image">
 
                 <img
@@ -88,7 +87,6 @@ function ProductGallery({ images = [] }) {
             </div>
 
             {/* THUMBNAILS */}
-
             {validImages.length > 1 && (
 
                 <div className="product-thumbnails">

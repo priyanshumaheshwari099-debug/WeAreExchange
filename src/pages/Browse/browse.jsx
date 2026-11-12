@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,7 +13,7 @@ import "./Browse.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 const DEFAULT_IMAGE =
     "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85";
 
@@ -111,7 +112,6 @@ function Browse() {
             );
         })
         .filter((item) => {
-            // Price filter tabhi chalega jab dono prices enter hon
             if (!priceReady) return true;
 
             const price = Number(item.value) || 0;
@@ -196,7 +196,6 @@ function Browse() {
         [loading]
     );
 
-    // Product animation after every filter change
     useEffect(() => {
         if (loading) return;
         if (!priceReady && (
@@ -275,8 +274,6 @@ function Browse() {
                             community. Find pieces you love and give
                             your wardrobe something different.
                         </p>
-
-                      
                     </div>
 
                     <BrowseHeroVisual clothes={clothes} />
@@ -319,8 +316,7 @@ function Browse() {
                                         price.
                                     </h2>
                                 </div>
-                            ) : filteredClothes.length ===
-                              0 ? (
+                            ) : filteredClothes.length === 0 ? (
                                 <div className="browse-state empty">
                                     <span>NO ITEMS FOUND</span>
 
@@ -329,9 +325,7 @@ function Browse() {
                                         filters.
                                     </h2>
 
-                                    <button
-                                        onClick={clearFilters}
-                                    >
+                                    <button onClick={clearFilters}>
                                         CLEAR FILTERS →
                                     </button>
                                 </div>
@@ -339,17 +333,14 @@ function Browse() {
                                 filteredClothes.map(
                                     (clothing, index) => {
                                         const image =
-                                            clothing.images
-                                                ?.length
+                                            clothing.images?.length
                                                 ? `${API}${clothing.images[0]}`
                                                 : DEFAULT_IMAGE;
 
                                         return (
                                             <article
                                                 className="browse-product"
-                                                key={
-                                                    clothing._id
-                                                }
+                                                key={clothing._id}
                                             >
                                                 <div className="browse-image">
                                                     <img
@@ -358,9 +349,7 @@ function Browse() {
                                                             clothing.title ||
                                                             "Clothing"
                                                         }
-                                                        onError={(
-                                                            e
-                                                        ) => {
+                                                        onError={(e) => {
                                                             e.currentTarget.src =
                                                                 DEFAULT_IMAGE;
                                                         }}
@@ -368,18 +357,12 @@ function Browse() {
 
                                                     <span className="product-number">
                                                         {String(
-                                                            index +
-                                                                1
-                                                        ).padStart(
-                                                            2,
-                                                            "0"
-                                                        )}
+                                                            index + 1
+                                                        ).padStart(2, "0")}
                                                     </span>
 
                                                     <span className="condition">
-                                                        {
-                                                            clothing.condition
-                                                        }
+                                                        {clothing.condition}
                                                     </span>
 
                                                     <button
@@ -396,31 +379,23 @@ function Browse() {
 
                                                 <div className="browse-info">
                                                     <div className="product-category">
-                                                        {
-                                                            clothing.category
-                                                        }
+                                                        {clothing.category}
                                                     </div>
 
                                                     <h3>
-                                                        {
-                                                            clothing.title
-                                                        }
+                                                        {clothing.title}
                                                     </h3>
 
                                                     {clothing.brand && (
                                                         <p className="brand">
-                                                            {
-                                                                clothing.brand
-                                                            }
+                                                            {clothing.brand}
                                                         </p>
                                                     )}
 
                                                     <div className="browse-bottom">
                                                         <span>
                                                             SIZE{" "}
-                                                            {
-                                                                clothing.size
-                                                            }
+                                                            {clothing.size}
                                                         </span>
 
                                                         <strong>

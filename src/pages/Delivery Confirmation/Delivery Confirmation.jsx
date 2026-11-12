@@ -2,10 +2,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { ArrowLeft, CheckCircle2, Clock3, MapPin, Package, Truck, ShieldCheck, RefreshCw } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Clock3,
+  MapPin,
+  Package,
+  Truck,
+  ShieldCheck,
+  RefreshCw
+} from "lucide-react";
 import "./Delivery Confirmation.css";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 const getSavedUser = () => {
   try {
@@ -40,7 +49,10 @@ export default function DeliveryConfirmation() {
       const data = res.data?.swap || res.data;
       setSwap(data);
     } catch (err) {
-      setError(err.response?.data?.message || "Delivery details load nahi ho sake. Dobara try karo.");
+      setError(
+        err.response?.data?.message ||
+        "Delivery details load nahi ho sake. Dobara try karo."
+      );
     } finally {
       setLoading(false);
     }
@@ -54,7 +66,9 @@ export default function DeliveryConfirmation() {
     getId(swap?.deliveryMethodSelectedBy) === userId;
 
   const alreadyConfirmed = Boolean(swap?.deliveryMethodConfirmedBy);
-  const isShipping = String(swap?.deliveryMethod || "").toLowerCase().includes("ship");
+  const isShipping = String(swap?.deliveryMethod || "")
+    .toLowerCase()
+    .includes("ship");
 
   const handleConfirm = async () => {
     if (!userId) {
@@ -94,14 +108,17 @@ export default function DeliveryConfirmation() {
     );
   }
 
-  if (!swap || error && !swap) {
+  if (!swap || (error && !swap)) {
     return (
       <div className="dc-page">
         <div className="dc-state">
           <Package size={42} />
           <h2>Details load nahi hui</h2>
           <p>{error || "Swap request nahi mili."}</p>
-          <button className="dc-primary" onClick={() => navigate("/delivery")}>
+          <button
+            className="dc-primary"
+            onClick={() => navigate("/delivery")}
+          >
             Back to Deliveries
           </button>
         </div>
@@ -124,12 +141,22 @@ export default function DeliveryConfirmation() {
             <div className="dc-brand-icon">
               {isShipping ? <Truck size={30} /> : <MapPin size={30} />}
             </div>
-            <span className={`dc-pill ${alreadyConfirmed ? "dc-pill-success" : "dc-pill-pending"}`}>
+
+            <span
+              className={`dc-pill ${
+                alreadyConfirmed
+                  ? "dc-pill-success"
+                  : "dc-pill-pending"
+              }`}
+            >
               {alreadyConfirmed ? "Confirmed" : "Action required"}
             </span>
           </div>
 
-          <p className="dc-eyebrow">WEAREXCHANGE · DELIVERY SETUP</p>
+          <p className="dc-eyebrow">
+            WEAREXCHANGE · DELIVERY SETUP
+          </p>
+
           <h1>
             {alreadyConfirmed
               ? "Delivery method confirmed"
@@ -137,6 +164,7 @@ export default function DeliveryConfirmation() {
                 ? "Waiting for confirmation"
                 : "Confirm your delivery method"}
           </h1>
+
           <p className="dc-subtitle">
             {alreadyConfirmed
               ? "Both users can now continue to the delivery details."
@@ -149,28 +177,41 @@ export default function DeliveryConfirmation() {
             <div className="dc-method-icon">
               {isShipping ? <Truck size={27} /> : <MapPin size={27} />}
             </div>
+
             <div className="dc-method-copy">
-              <span className="dc-label">SELECTED DELIVERY METHOD</span>
-              <h2>{isShipping ? "Ship Items" : "Exchange Locally"}</h2>
+              <span className="dc-label">
+                SELECTED DELIVERY METHOD
+              </span>
+              <h2>
+                {isShipping ? "Ship Items" : "Exchange Locally"}
+              </h2>
               <p>
                 {isShipping
                   ? "The participants will arrange shipment of their items."
                   : "The participants will coordinate a local handover."}
               </p>
             </div>
+
             <CheckCircle2 className="dc-method-check" size={23} />
           </div>
 
           <div className="dc-info-row">
-            <div className="dc-info-icon"><ShieldCheck size={20} /></div>
+            <div className="dc-info-icon">
+              <ShieldCheck size={20} />
+            </div>
             <div>
               <strong>Both participants must agree</strong>
-              <p>The delivery process continues after the other participant confirms this method.</p>
+              <p>
+                The delivery process continues after the other participant
+                confirms this method.
+              </p>
             </div>
           </div>
 
           {error && (
-            <div className="dc-error" role="alert">{error}</div>
+            <div className="dc-error" role="alert">
+              {error}
+            </div>
           )}
 
           {alreadyConfirmed ? (
@@ -186,7 +227,9 @@ export default function DeliveryConfirmation() {
               <Clock3 size={21} />
               <div>
                 <strong>Waiting for the other participant</strong>
-                <p>They need to open this page and confirm the selected method.</p>
+                <p>
+                  They need to open this page and confirm the selected method.
+                </p>
               </div>
             </div>
           ) : (
@@ -196,7 +239,9 @@ export default function DeliveryConfirmation() {
                 onClick={handleConfirm}
                 disabled={confirming}
               >
-                {confirming ? "Confirming..." : "Confirm delivery method"}
+                {confirming
+                  ? "Confirming..."
+                  : "Confirm delivery method"}
                 {!confirming && <CheckCircle2 size={19} />}
               </button>
               <p>Only confirm if you agree with the selected method.</p>
@@ -214,7 +259,9 @@ export default function DeliveryConfirmation() {
           )}
 
           <div className="dc-footer">
-            <span><ShieldCheck size={15} /> Secure swap process</span>
+            <span>
+              <ShieldCheck size={15} /> Secure swap process
+            </span>
             <span>Swap ID: {String(swapId).slice(-8)}</span>
           </div>
         </section>

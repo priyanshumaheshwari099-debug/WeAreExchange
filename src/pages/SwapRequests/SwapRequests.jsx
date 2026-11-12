@@ -11,12 +11,16 @@ function SwapRequests() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    const API = "https://wearexchange-backend.onrender.com";
+
     const getUser = () => {
         try {
             const user = JSON.parse(localStorage.getItem("user") || "null");
             const googleUser = JSON.parse(localStorage.getItem("googleUser") || "null");
+
             if (user?.id || user?._id) return user;
             if (googleUser?.id || googleUser?._id) return googleUser;
+
             return null;
         } catch {
             return null;
@@ -28,10 +32,13 @@ function SwapRequests() {
 
     const getImage = (image) => {
         if (!image) return "";
+
         if (Array.isArray(image)) image = image[0];
         if (!image) return "";
+
         if (image.startsWith("http")) return image;
-        return `http://localhost:5000${image.startsWith("/") ? "" : "/"}${image}`;
+
+        return `${API}${image.startsWith("/") ? "" : "/"}${image}`;
     };
 
     useEffect(() => {
@@ -45,13 +52,15 @@ function SwapRequests() {
 
             try {
                 const res = await axios.get(
-                    `http://localhost:5000/api/swapping/received/${userId}`
+                    `${API}/api/swapping/received/${userId}`
                 );
+
                 if (active) {
                     setRequests(Array.isArray(res.data) ? res.data : []);
                 }
             } catch (error) {
                 console.error("Failed to load swap requests:", error);
+
                 if (active) setRequests([]);
             } finally {
                 if (active) setLoading(false);
@@ -65,45 +74,55 @@ function SwapRequests() {
         };
     }, [userId]);
 
+    const handleAccept = async (id) => {
+        try {
+            if (!id || id === ":swapId") {
+                toast.error("Invalid swap request ID");
+                return;
+            }
 
-const handleAccept = async (id) => {
-    try {
-        if (!id || id === ":swapId") {
-            toast.error("Invalid swap request ID");
-            return;
+            await axios.patch(
+                `${API}/api/swapping/accept/${id}`,
+                { userId }
+            );
+
+            console.log("Accept Swap ID:", id);
+
+            toast.success("Swap accepted! Choose delivery method.");
+            navigate(`/delivery/${id}`);
+        } catch (error) {
+            console.error("Accept swap error:", error.response?.data || error);
+
+            toast.error(
+                error.response?.data?.message || "Could not accept request"
+            );
         }
-
-        await axios.patch(
-            `http://localhost:5000/api/swapping/accept/${id}`,
-            { userId }
-        );
-console.log("Accept Swap ID:", id);
-        toast.success("Swap accepted! Choose delivery method.");
-        navigate(`/delivery/${id}`);
-    } catch (error) {
-        console.error("Accept swap error:", error.response?.data || error);
-        toast.error(
-            error.response?.data?.message || "Could not accept request"
-        );
-    }
-};
+    };
 
     const handleReject = async (id) => {
         try {
             await axios.patch(
-                `http://localhost:5000/api/swapping/reject/${id}`,
+                `${API}/api/swapping/reject/${id}`,
                 { userId }
             );
-            setRequests((prev) => prev.filter((item) => item._id !== id));
+
+            setRequests((prev) =>
+                prev.filter((item) => item._id !== id)
+            );
+
             toast.success("Swap request rejected");
         } catch (error) {
             console.error("Reject error:", error);
-            toast.error(error.response?.data?.message || "Could not reject request");
+
+            toast.error(
+                error.response?.data?.message || "Could not reject request"
+            );
         }
     };
 
     const openChat = (swapId) => {
         if (!userId) return;
+
         navigate(`/chat/${swapId}`);
     };
 
@@ -125,7 +144,9 @@ console.log("Accept Swap ID:", id);
                     <div>
                         <span>EXCHANGE ACTIVITY</span>
                         <h1>Swap Requests</h1>
-                        <p>Review clothing swap requests sent to your listings.</p>
+                        <p>
+                            Review clothing swap requests sent to your listings.
+                        </p>
                     </div>
 
                     <div className="swap-count">
@@ -138,7 +159,9 @@ console.log("Accept Swap ID:", id);
                     <div className="swap-empty">
                         <div className="swap-empty-icon">⇄</div>
                         <h2>No swap requests yet</h2>
-                        <p>Your clothing exchange requests will appear here.</p>
+                        <p>
+                            Your clothing exchange requests will appear here.
+                        </p>
                     </div>
                 ) : requests.length === 0 ? (
                     <div className="swap-empty">
@@ -162,13 +185,23 @@ console.log("Accept Swap ID:", id);
                                         <div className="swap-image">
                                             <img
                                                 src={getImage(request.offeredItem?.images)}
-                                                alt={request.offeredItem?.title || "Clothing Item"}
+                                                alt={
+                                                    request.offeredItem?.title ||
+                                                    "Clothing Item"
+                                                }
                                             />
                                         </div>
+
                                         <div className="swap-item-info">
                                             <span>THEY OFFER</span>
-                                            <h3>{request.offeredItem?.title || "Clothing Item"}</h3>
-                                            <p>{request.offeredItem?.brand || "No brand"}</p>
+                                            <h3>
+                                                {request.offeredItem?.title ||
+                                                    "Clothing Item"}
+                                            </h3>
+                                            <p>
+                                                {request.offeredItem?.brand ||
+                                                    "No brand"}
+                                            </p>
                                         </div>
                                     </div>
 
@@ -178,13 +211,23 @@ console.log("Accept Swap ID:", id);
                                         <div className="swap-image">
                                             <img
                                                 src={getImage(request.requestedItem?.images)}
-                                                alt={request.requestedItem?.title || "Clothing Item"}
+                                                alt={
+                                                    request.requestedItem?.title ||
+                                                    "Your Item"
+                                                }
                                             />
                                         </div>
+
                                         <div className="swap-item-info">
                                             <span>THEY WANT</span>
-                                            <h3>{request.requestedItem?.title || "Your Item"}</h3>
-                                            <p>{request.requestedItem?.brand || "No brand"}</p>
+                                            <h3>
+                                                {request.requestedItem?.title ||
+                                                    "Your Item"}
+                                            </h3>
+                                            <p>
+                                                {request.requestedItem?.brand ||
+                                                    "No brand"}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -196,15 +239,21 @@ console.log("Accept Swap ID:", id);
                                     >
                                         Chat
                                     </button>
+
                                     <button
                                         className="reject-btn"
-                                        onClick={() => handleReject(request._id)}
+                                        onClick={() =>
+                                            handleReject(request._id)
+                                        }
                                     >
                                         Reject
                                     </button>
+
                                     <button
                                         className="accept-btn"
-                                        onClick={() => handleAccept(request._id)}
+                                        onClick={() =>
+                                            handleAccept(request._id)
+                                        }
                                     >
                                         Accept Swap
                                     </button>

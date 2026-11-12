@@ -1,10 +1,14 @@
+
 import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Navbar from "../../components/Navbar/Navbar";
 import { State, City } from "country-state-city";
 import "./Profile.css";
-import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer";
+
+const API = "https://wearexchange-backend.onrender.com";
+
 function Profile() {
     const savedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -59,7 +63,7 @@ function Profile() {
             setLoading(true);
 
             const response = await axios.put(
-                `http://localhost:5000/api/auth/profile/${user.id}`,
+                `${API}/api/auth/profile/${user.id || user._id}`,
                 formData
             );
 
@@ -75,7 +79,6 @@ function Profile() {
             toast.success("Profile updated successfully!");
 
             setEdit(false);
-
         } catch (error) {
             toast.error(
                 error.response?.data?.message ||
@@ -106,9 +109,7 @@ function Profile() {
 
             <div className="profile-page">
                 <div className="profile-card">
-
                     <div className="profile-top">
-
                         <img
                             src={
                                 user.profileImage ||
@@ -121,8 +122,6 @@ function Profile() {
                         <div className="profile-info">
                             <h1>{user.name}</h1>
                             <p>{user.email}</p>
-
-                            
                         </div>
 
                         <button
@@ -131,14 +130,12 @@ function Profile() {
                         >
                             ✏️ Edit Profile
                         </button>
-
                     </div>
 
                     <div className="details-box">
                         <h2>Profile Details</h2>
 
                         <div className="details-grid">
-
                             <div>
                                 <label>Name</label>
                                 <p>{user.name}</p>
@@ -172,24 +169,18 @@ function Profile() {
                                         : "Email & Password"}
                                 </p>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
 
             {edit && (
                 <div className="modal-overlay">
-
                     <div className="edit-modal">
-
                         <div className="modal-header">
                             <h2>Edit Profile</h2>
 
-                            <button
-                                onClick={() => setEdit(false)}
-                            >
+                            <button onClick={() => setEdit(false)}>
                                 ✕
                             </button>
                         </div>
@@ -204,7 +195,6 @@ function Profile() {
                         />
 
                         <label>Name</label>
-
                         <input
                             name="name"
                             value={formData.name}
@@ -212,14 +202,9 @@ function Profile() {
                         />
 
                         <label>Email</label>
-
-                        <input
-                            value={user.email}
-                            disabled
-                        />
+                        <input value={user.email} disabled />
 
                         <label>Phone</label>
-
                         <input
                             name="phone"
                             value={formData.phone}
@@ -227,15 +212,12 @@ function Profile() {
                         />
 
                         <label>State</label>
-
                         <select
                             name="state"
                             value={formData.state}
                             onChange={handleStateChange}
                         >
-                            <option value="">
-                                Select State
-                            </option>
+                            <option value="">Select State</option>
 
                             {states.map((state) => (
                                 <option
@@ -248,7 +230,6 @@ function Profile() {
                         </select>
 
                         <label>City / Town</label>
-
                         <select
                             name="city"
                             value={formData.city}
@@ -272,7 +253,6 @@ function Profile() {
                         </select>
 
                         <div className="modal-buttons">
-
                             <button
                                 className="cancel-btn"
                                 onClick={() => setEdit(false)}
@@ -285,18 +265,14 @@ function Profile() {
                                 onClick={handleSave}
                                 disabled={loading}
                             >
-                                {loading
-                                    ? "Saving..."
-                                    : "Save Changes"}
+                                {loading ? "Saving..." : "Save Changes"}
                             </button>
-
                         </div>
-
                     </div>
-
                 </div>
             )}
-            <Footer/>
+
+            <Footer />
         </>
     );
 }

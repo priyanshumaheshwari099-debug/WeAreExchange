@@ -24,8 +24,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./MySwaps.css";
 
-const API = "http://localhost:5000";
-
+const API = "https://wearexchange-backend.onrender.com";
 const getUser = () => {
   try {
     return JSON.parse(

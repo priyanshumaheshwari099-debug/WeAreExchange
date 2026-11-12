@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Navbar from "../../components/Navbar/Navbar";
 import "./RequestSwap.css";
 
-const API = "http://localhost:5000";
+const API = "https://wearexchange-backend.onrender.com";
 
 function RequestSwap() {
     const { id } = useParams();
@@ -16,8 +16,10 @@ function RequestSwap() {
         try {
             const user = JSON.parse(localStorage.getItem("user") || "null");
             const googleUser = JSON.parse(localStorage.getItem("googleUser") || "null");
+
             if (user?.id || user?._id) return user;
             if (googleUser?.id || googleUser?._id) return googleUser;
+
             return null;
         } catch {
             return null;
@@ -35,15 +37,25 @@ function RequestSwap() {
     const [searching, setSearching] = useState(false);
     const [sending, setSending] = useState(false);
 
+    const getImage = (image) => {
+        if (!image) return "";
+        if (Array.isArray(image)) image = image[0];
+        if (!image) return "";
+        if (image.startsWith("http")) return image;
+        return `${API}${image.startsWith("/") ? "" : "/"}${image}`;
+    };
+
     useEffect(() => {
         let active = true;
 
         const loadTarget = async () => {
             try {
                 const res = await axios.get(`${API}/api/clothing/${id}`);
+
                 if (active) setTargetItem(res.data);
             } catch (error) {
                 console.error("TARGET ITEM ERROR:", error);
+
                 if (active) setTargetItem(null);
             } finally {
                 if (active) setLoading(false);
@@ -65,16 +77,26 @@ function RequestSwap() {
         }
 
         let active = true;
+
         const timer = setTimeout(async () => {
             try {
                 setSearching(true);
+
                 const res = await axios.get(
                     `${API}/api/clothing/my/${userId}/search`,
-                    { params: { q: search, page: 1, limit: 20 } }
+                    {
+                        params: {
+                            q: search,
+                            page: 1,
+                            limit: 20
+                        }
+                    }
                 );
+
                 if (active) setMyItems(res.data.clothes || []);
             } catch (error) {
                 console.error("MY CLOTHES ERROR:", error);
+
                 if (active) setMyItems([]);
             } finally {
                 if (active) setSearching(false);
@@ -96,6 +118,7 @@ function RequestSwap() {
                 toastId: "guest-swap",
                 autoClose: 3000
             });
+
             setTimeout(() => navigate("/signup"), 3000);
             return;
         }
@@ -124,10 +147,14 @@ function RequestSwap() {
                 requestedItem: targetItem._id
             });
 
-            toast.success(res.data.message || "Swap request sent successfully");
+            toast.success(
+                res.data.message || "Swap request sent successfully"
+            );
+
             setTimeout(() => navigate("/swap-requests"), 1000);
         } catch (error) {
             console.error("SEND SWAP ERROR:", error.response?.data || error);
+
             toast.error(
                 error.response?.data?.message || "Failed to send swap request"
             );
@@ -149,7 +176,9 @@ function RequestSwap() {
         return (
             <div className="rs-empty">
                 <h2>Product not found</h2>
-                <button onClick={() => navigate("/browse")}>BACK TO BROWSE</button>
+                <button onClick={() => navigate("/browse")}>
+                    BACK TO BROWSE
+                </button>
             </div>
         );
     }
@@ -178,14 +207,20 @@ function RequestSwap() {
                     <div className="rs-target-card">
                         <div className="rs-target-image">
                             <img
-                                src={targetItem.images?.[0] ? `${API}${targetItem.images[0]}` : ""}
+                                src={getImage(targetItem.images)}
                                 alt={targetItem.title}
                             />
                         </div>
 
                         <div className="rs-target-info">
-                            <span className="rs-category">{targetItem.category}</span>
-                            <p className="rs-brand">{targetItem.brand || "NO BRAND"}</p>
+                            <span className="rs-category">
+                                {targetItem.category}
+                            </span>
+
+                            <p className="rs-brand">
+                                {targetItem.brand || "NO BRAND"}
+                            </p>
+
                             <h2>{targetItem.title}</h2>
 
                             <div className="rs-details">
@@ -193,10 +228,12 @@ function RequestSwap() {
                                     <span>SIZE</span>
                                     <strong>{targetItem.size || "N/A"}</strong>
                                 </div>
+
                                 <div>
                                     <span>CONDITION</span>
                                     <strong>{targetItem.condition || "N/A"}</strong>
                                 </div>
+
                                 <div>
                                     <span>VALUE</span>
                                     <strong>₹{targetItem.value || 0}</strong>
@@ -217,13 +254,17 @@ function RequestSwap() {
                             <span>YOUR CLOSET</span>
                             <h2>Choose what you'll offer</h2>
                         </div>
+
                         <div className="rs-count">
-                            {searching ? "SEARCHING..." : `${myItems.length} ITEMS`}
+                            {searching
+                                ? "SEARCHING..."
+                                : `${myItems.length} ITEMS`}
                         </div>
                     </div>
 
                     <div className="rs-search">
                         <span>⌕</span>
+
                         <input
                             type="text"
                             placeholder="Search your clothes..."
@@ -246,26 +287,35 @@ function RequestSwap() {
                             {myItems.map((item) => (
                                 <div
                                     key={item._id}
-                                    className={`rs-item ${selectedItem?._id === item._id ? "selected" : ""}`}
+                                    className={`rs-item ${
+                                        selectedItem?._id === item._id
+                                            ? "selected"
+                                            : ""
+                                    }`}
                                     onClick={() => setSelectedItem(item)}
                                 >
                                     <div className="rs-item-image">
                                         <img
-                                            src={item.images?.[0] ? `${API}${item.images[0]}` : ""}
+                                            src={getImage(item.images)}
                                             alt={item.title}
                                         />
+
                                         <div className="rs-select">
-                                            {selectedItem?._id === item._id ? "✓" : ""}
+                                            {selectedItem?._id === item._id
+                                                ? "✓"
+                                                : ""}
                                         </div>
                                     </div>
 
                                     <div className="rs-item-info">
                                         <span>{item.brand || "NO BRAND"}</span>
                                         <h3>{item.title}</h3>
+
                                         <div>
                                             <small>{item.size}</small>
                                             <small>{item.condition}</small>
                                         </div>
+
                                         <strong>₹{item.value || 0}</strong>
                                     </div>
                                 </div>
@@ -274,7 +324,9 @@ function RequestSwap() {
                     ) : (
                         <div className="rs-no-items">
                             <h3>Browse clothes and get ready to swap</h3>
-                            <p>Sign up when you're ready to send your swap request.</p>
+                            <p>
+                                Sign up when you're ready to send your swap request.
+                            </p>
                         </div>
                     )}
                 </section>
@@ -282,6 +334,7 @@ function RequestSwap() {
                 <div className="rs-bottom">
                     <div>
                         <span>READY TO EXCHANGE?</span>
+
                         <p>
                             {selectedItem
                                 ? `You selected "${selectedItem.title}"`
@@ -294,7 +347,9 @@ function RequestSwap() {
                         disabled={sending}
                         onClick={sendRequest}
                     >
-                        {sending ? "SENDING..." : "SEND SWAP REQUEST →"}
+                        {sending
+                            ? "SENDING..."
+                            : "SEND SWAP REQUEST →"}
                     </button>
                 </div>
             </div>

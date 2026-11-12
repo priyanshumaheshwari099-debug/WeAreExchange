@@ -34,9 +34,9 @@ function Login() {
       setLoading(true);
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+  "https://wearexchange-backend.onrender.com/api/auth/login",
+  formData
+);
 
       const backendUser = data?.user;
       const userId = backendUser?.id || backendUser?._id;
@@ -73,10 +73,10 @@ function Login() {
       const firebaseUser = result.user;
       const credential = await firebaseUser.getIdToken();
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/auth/google",
-        { credential }
-      );
+     const { data } = await axios.post(
+  "https://wearexchange-backend.onrender.com/api/auth/google",
+  { credential }
+);
 
       console.log("GOOGLE BACKEND RESPONSE:", data);
 
