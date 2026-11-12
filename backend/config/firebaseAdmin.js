@@ -1,9 +1,25 @@
-const { initializeApp, cert } = require("firebase-admin/app");
+const { initializeApp, cert, getApps } = require("firebase-admin/app");
 
-const serviceAccount = require("./firebase-service-account.json");
+let serviceAccount;
 
-const app = initializeApp({
-    credential: cert(serviceAccount)
-});
+try {
+    if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+        serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    } else if (process.env.RENDER) {
+        throw new Error("FIREBASE_SERVICE_ACCOUNT missing on Render");
+    } else {
+        serviceAccount = require("./firebase-service-account.json");
+    }
 
-module.exports = app;
+    const app = getApps().length ?
+        getApps()[0] :
+        initializeApp({
+            credential: cert(serviceAccount)
+        });
+
+    module.exports = app;
+
+} catch (error) {
+    console.error("Firebase Admin Error:", error.message);
+    throw error;
+}
